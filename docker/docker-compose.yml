@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  front:
+    image: ${IMAGE_FULL_NAME}
+    networks:
+      - evaluation
+    ports:
+      - 8001:8080
+    volumes:
+      - data:/data
+    environment:
+      - PROFILES=${ENV}
+    deploy:
+      replicas: ${REPLICAS_COUNT}
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+      update_config:
+        delay: 10s
+        order: start-first
+      restart_policy:
+        condition: on-failure
+networks:
+  evaluation:
+    external: true
+volumes:
+  data:
+

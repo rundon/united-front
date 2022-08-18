@@ -1,0 +1,55 @@
+image: 31edu.f3322.net:9902/docker/gitlab-ci:latest
+
+# 定义全局环境变量
+variables:
+  ENV: "$CI_JOB_STAGE"
+  IMAGE_FULL_NAME: "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHA"
+  REPLICAS_COUNT: 1
+
+stages:
+  - package
+  - dev
+  - test
+
+front:docker:package:
+  stage: package
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - mkdir docker/app && mv docker / && mv * /docker/app && mv .[^.]* /docker/app && mv /docker .
+    - docker build --rm --pull -t "$IMAGE_FULL_NAME" docker/
+    - docker push "$IMAGE_FULL_NAME"
+    - docker image rm -f "$IMAGE_FULL_NAME"
+  tags:
+    - shared
+  only:
+    - /^release.*$/
+
+front:deploy:dev:
+  stage: dev
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - 'cat docker/docker-compose.yml
+      | docker stack deploy --with-registry-auth -c - teacherEvaluation'
+  dependencies:
+    - front:docker:package
+  tags:
+    - dev
+  only:
+    - /^release.*$/
+
+front:deploy:test:
+  stage: test
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - 'cat docker/docker-compose.yml
+      | docker stack deploy --with-registry-auth -c - teacherEvaluation'
+  dependencies:
+    - front:docker:package
+  tags:
+    - test
+  when: manual
+  only:
+    - /^release.*$/
