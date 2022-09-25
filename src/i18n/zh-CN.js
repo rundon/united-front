@@ -3,8 +3,8 @@ const t = {}
 t.loading = '加载中...'
 
 t.brand = {}
-t.brand.lg = '人人权限企业版'
-t.brand.mini = '人人'
+t.brand.lg = '统一框架'
+t.brand.mini = '框架'
 
 t.add = '新增'
 t.delete = '删除'
