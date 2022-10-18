@@ -163,7 +163,7 @@ export default {
         if (!valid) {
           return false
         }
-        this.$http[!this.dataForm.id ? 'post' : 'put']('/sys/sms', this.dataForm).then(({ data: res }) => {
+        this.$http[!this.dataForm.id ? 'post' : 'put']('/api/message/sms', this.dataForm).then(({ data: res }) => {
           if (res.code !== 0) {
             return this.$message.error(res.msg)
           }

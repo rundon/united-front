@@ -21,7 +21,7 @@ http.interceptors.request.use(config => {
   config.headers['Accept-Language'] = Cookies.get('language') || 'zh-CN'
   const { token } = store.state;
   if (!config.headers['Authorization']) {
-    debugger
+   // debugger
     if (token && token !== "undefined") {//token 过期 需要用到Basic，返回之后需要用到新的token
       config.headers['Authorization'] = 'Bearer ' + token;
     } else {
@@ -30,7 +30,7 @@ http.interceptors.request.use(config => {
   } else {
     console.log("已经设置:" + config.headers['Authorization'])
   }
-debugger
+//debugger
   // 默认参数
   var defaults = {}
   // 防止缓存，GET请求默认带_t参数
@@ -86,7 +86,7 @@ http.interceptors.response.use(response => {
             "Authorization": 'Basic ' + Base64.encode(`${window.SITE_CONFIG['clientId']}:${window.SITE_CONFIG['clientSecret']}`)
           }
         }).then(({ data: res }) => {
-          debugger
+         // debugger
           if (res.code !== 0) {
             clearLoginInfo()
             router.replace({ name: 'login' })

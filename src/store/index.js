@@ -45,7 +45,7 @@ export default new Vuex.Store({
     },
     // 重置vuex本地储存状态
     resetStore(state) {
-      debugger
+     // debugger
       localStorage.clear();
       state.token=null;
       state.refresh=null;
