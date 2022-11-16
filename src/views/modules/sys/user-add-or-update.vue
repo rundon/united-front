@@ -5,7 +5,7 @@
         <el-input v-model="dataForm.username" :placeholder="$t('user.username')"></el-input>
       </el-form-item>
       <el-form-item prop="deptName" :label="$t('user.deptName')">
-        <ren-dept-tree v-model="dataForm.deptId" :placeholder="$t('dept.title')" :dept-name.sync="dataForm.deptName"></ren-dept-tree>
+        <united-dept-tree v-model="dataForm.deptId" :placeholder="$t('dept.title')" :dept-name.sync="dataForm.deptName"></united-dept-tree>
       </el-form-item>
       <el-form-item prop="password" :label="$t('user.password')" :class="{ 'is-required': !dataForm.id }">
         <el-input v-model="dataForm.password" type="password" :placeholder="$t('user.password')"></el-input>
@@ -17,7 +17,7 @@
         <el-input v-model="dataForm.realName" :placeholder="$t('user.realName')"></el-input>
       </el-form-item>
       <el-form-item prop="gender" :label="$t('user.gender')">
-        <ren-radio-group v-model="dataForm.gender" dict-type="gender"></ren-radio-group>
+        <united-radio-group v-model="dataForm.gender" dict-type="gender"></united-radio-group>
       </el-form-item>
       <el-form-item prop="email" :label="$t('user.email')">
         <el-input v-model="dataForm.email" :placeholder="$t('user.email')"></el-input>

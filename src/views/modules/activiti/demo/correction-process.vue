@@ -25,7 +25,7 @@
           </el-form-item>
       </el-form>
       <!--  流程综合组件   -->
-      <ren-process-multiple v-if="processVisible" updateInstanceIdUrl="/act/demo/correction/updateInstanceId" saveFormUrl="/act/demo/correction" dataFormName="dataForm" ref="renProcessMultiple" ></ren-process-multiple>
+      <united-process-multiple v-if="processVisible" updateInstanceIdUrl="/act/demo/correction/updateInstanceId" saveFormUrl="/act/demo/correction" dataFormName="dataForm" ref="renProcessMultiple" ></united-process-multiple>
   </el-card>
 </template>
 

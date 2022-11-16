@@ -6,10 +6,10 @@
           <el-input v-model="dataForm.username" :placeholder="$t('user.username')" clearable></el-input>
         </el-form-item>
         <el-form-item>
-          <ren-select v-model="dataForm.gender" dict-type="gender" :placeholder="$t('user.gender')"></ren-select>
+          <united-select v-model="dataForm.gender" dict-type="gender" :placeholder="$t('user.gender')"></united-select>
         </el-form-item>
         <el-form-item>
-          <ren-dept-tree v-model="dataForm.deptId" :placeholder="$t('dept.title')" :query="true"></ren-dept-tree>
+          <united-dept-tree v-model="dataForm.deptId" :placeholder="$t('dept.title')" :query="true"></united-dept-tree>
         </el-form-item>
         <el-form-item>
           <el-button @click="getDataList()">{{ $t('query') }}</el-button>

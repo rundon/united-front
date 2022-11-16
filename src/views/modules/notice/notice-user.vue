@@ -3,7 +3,7 @@
     <div class="mod-demo__sysnoticeuser">
       <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
         <el-form-item>
-          <ren-select v-model="dataForm.type" dict-type="notice_type" :placeholder="$t('notice.type')"></ren-select>
+          <united-select v-model="dataForm.type" dict-type="notice_type" :placeholder="$t('notice.type')"></united-select>
         </el-form-item>
         <el-form-item>
           <el-button @click="getDataList()">{{ $t('query') }}</el-button>

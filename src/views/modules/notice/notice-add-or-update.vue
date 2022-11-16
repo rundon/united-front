@@ -2,7 +2,7 @@
   <el-dialog :visible.sync="visible" :title="!dataForm.id ? $t('add') : $t('update')" :close-on-click-modal="false" :close-on-press-escape="false">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" :label-width="$i18n.locale === 'en-US' ? '120px' : '80px'">
       <el-form-item :label="$t('notice.type')" prop="type">
-          <ren-radio-group v-model="dataForm.type" dict-type="notice_type"></ren-radio-group>
+          <united-radio-group v-model="dataForm.type" dict-type="notice_type"></united-radio-group>
       </el-form-item>
       <el-form-item :label="$t('notice.title')"  prop="title">
           <el-input v-model="dataForm.title" :placeholder="$t('notice.title')"></el-input>

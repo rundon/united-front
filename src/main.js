@@ -9,15 +9,15 @@ import '@/icons'
 import '@/element-ui/theme/index.css'
 import '@/assets/scss/aui.scss'
 import http from '@/utils/request'
-import renRadioGroup from '@/components/ren-radio-group'
-import renSelect from '@/components/ren-select'
-import renProcessMultiple from '@/components/ren-process-multiple'
-import renProcessStart from '@/components/ren-process-start'
-import renProcessRunning from '@/components/ren-process-running'
-import renProcessDetail from '@/components/ren-process-detail'
-import renDeptTree from '@/components/ren-dept-tree'
-import renRegionTree from '@/components/ren-region-tree'
-import renUpload from '@/components/ren-upload';
+import unitedRadioGroup from '@/components/united-radio-group'
+import unitedSelect from '@/components/united-select'
+import unitedProcessMultiple from '@/components/united-process-multiple'
+import unitedProcessStart from '@/components/united-process-start'
+import unitedProcessRunning from '@/components/united-process-running'
+import unitedProcessDetail from '@/components/united-process-detail'
+import unitedDeptTree from '@/components/united-dept-tree'
+import unitedRegionTree from '@/components/united-region-tree'
+import unitedUpload from '@/components/united-upload';
 import { hasPermission, getDictLabel } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import 'xe-utils'
@@ -30,15 +30,15 @@ Vue.use(Element, {
   size: 'default',
   i18n: (key, value) => i18n.t(key, value)
 })
-Vue.use(renRadioGroup)
-Vue.use(renSelect)
-Vue.use(renUpload)
-Vue.use(renDeptTree)
-Vue.use(renRegionTree)
-Vue.use(renProcessMultiple)
-Vue.use(renProcessStart)
-Vue.use(renProcessRunning)
-Vue.use(renProcessDetail)
+Vue.use(unitedRadioGroup)
+Vue.use(unitedSelect)
+Vue.use(unitedUpload)
+Vue.use(unitedDeptTree)
+Vue.use(unitedRegionTree)
+Vue.use(unitedProcessMultiple)
+Vue.use(unitedProcessStart)
+Vue.use(unitedProcessRunning)
+Vue.use(unitedProcessDetail)
 
 // 挂载全局
 Vue.prototype.$http = http

@@ -26,7 +26,7 @@
     <template slot="footer">
       <el-button @click="visible = false">{{ $t('cancel') }}</el-button>
       <!--  流程启动组件  -->
-      <ren-process-start v-if="processVisible" updateInstanceIdUrl="/act/demo/correction/updateInstanceId" saveFormUrl="/act/demo/correction" dataFormName="dataForm" ref="renProcessStart" ></ren-process-start>
+      <united-process-start v-if="processVisible" updateInstanceIdUrl="/act/demo/correction/updateInstanceId" saveFormUrl="/act/demo/correction" dataFormName="dataForm" ref="renProcessStart" ></united-process-start>
     </template>
   </el-dialog>
 </template>
