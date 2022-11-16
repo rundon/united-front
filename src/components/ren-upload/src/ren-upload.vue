@@ -6,7 +6,8 @@
     :file-status-text="fileStatusText"
     @file-progress="onFileProgress"
     @file-added="onFileAdded"
-    @file-success="uploadSuccess"
+    @file-success="onFileSuccess"
+    @file-error="onFileError"
     class="uploader-app"
     v-if="isShow"
   >
@@ -170,10 +171,14 @@ methods: {
               file.resume();
   },
   // 上传成功
-  uploadSuccess(rootFile, file, chunk) {
+  onFileSuccess(rootFile, file, chunk) {
     this.showprogress = false;
-    // 更新文件列表
+      // 更新文件列表
     this.$emit('update', file);
+    console.log("上传成功");
+  },
+  onFileError(rootFile, file, response, chunk) {
+	  console.log(error)
   }
 },
 };

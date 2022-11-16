@@ -6,7 +6,7 @@
           <el-button type="primary" @click="configHandle()">{{ $t('oss.config') }}</el-button>
         </el-form-item>
         <el-form-item>
-          <ren-upload @refreshDataList="getDataList"></ren-upload>
+          <ren-upload @update="getDataList"></ren-upload>
         </el-form-item>
         <el-form-item>
           <el-button type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
