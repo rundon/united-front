@@ -74,8 +74,9 @@ data() {
           // 服务器分片校验函数，秒传及断点续传基础
           checkChunkUploadedByResponse: function (chunk, message) {
               let objMessage = JSON.parse(message);
+              debugger
               console.log(objMessage.data)
-              if (objMessage.data.resultStatus.value === '100') {
+              if (objMessage.data.resultStatus.value === 100) {
                   return true;
               }
 
@@ -116,10 +117,8 @@ methods: {
   onFileProgress(rootFile, file, chunk) {
      console.log(`上传中 ${file.name}，chunk：${chunk.startByte / 1024 / 1024} ~ ${chunk.endByte / 1024 / 1024}`)
   },
-  uploadBefore() {
-    console.log("开始上传");
-  },
   beforeupload() {
+    console.log("开始上传");
     this.$emit('update', 'false');
   },
   onFileAdded(file) {
