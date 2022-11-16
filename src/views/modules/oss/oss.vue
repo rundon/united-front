@@ -6,7 +6,7 @@
           <el-button type="primary" @click="configHandle()">{{ $t('oss.config') }}</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="uploadHandle()">{{ $t('oss.upload') }}</el-button>
+          <ren-upload @refreshDataList="getDataList"></ren-upload>
         </el-form-item>
         <el-form-item>
           <el-button type="danger" @click="deleteHandle()">{{ $t('deleteBatch') }}</el-button>
@@ -40,7 +40,7 @@
       <!-- 弹窗, 云存储配置 -->
       <config v-if="configVisible" ref="config"></config>
       <!-- 弹窗, 上传文件 -->
-      <upload v-if="uploadVisible" ref="upload" @refreshDataList="getDataList"></upload>
+      <!-- <upload v-if="uploadVisible" ref="upload" @refreshDataList="getDataList"></upload> -->
     </div>
   </el-card>
 </template>
@@ -48,7 +48,6 @@
 <script>
 import mixinViewModule from '@/mixins/view-module'
 import Config from './oss-config'
-import Upload from './oss-upload'
 export default {
   mixins: [mixinViewModule],
   data () {
@@ -65,8 +64,7 @@ export default {
     }
   },
   components: {
-    Config,
-    Upload
+    Config
   },
   methods: {
     // 云存储配置
@@ -74,13 +72,6 @@ export default {
       this.configVisible = true
       this.$nextTick(() => {
         this.$refs.config.init()
-      })
-    },
-    // 上传文件
-    uploadHandle () {
-      this.uploadVisible = true
-      this.$nextTick(() => {
-        this.$refs.upload.init()
       })
     }
   }

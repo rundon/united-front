@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Element from 'element-ui'
+import uploader from 'vue-simple-uploader'
 import App from '@/App'
 import i18n from '@/i18n'
 import router from '@/router'
@@ -16,23 +17,22 @@ import renProcessRunning from '@/components/ren-process-running'
 import renProcessDetail from '@/components/ren-process-detail'
 import renDeptTree from '@/components/ren-dept-tree'
 import renRegionTree from '@/components/ren-region-tree'
+import renUpload from '@/components/ren-upload';
 import { hasPermission, getDictLabel } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
-
 import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/index.css'
 Vue.use(VXETable)
-
+Vue.use(uploader)
 Vue.config.productionTip = false
-
 Vue.use(Element, {
   size: 'default',
   i18n: (key, value) => i18n.t(key, value)
 })
-
 Vue.use(renRadioGroup)
 Vue.use(renSelect)
+Vue.use(renUpload)
 Vue.use(renDeptTree)
 Vue.use(renRegionTree)
 Vue.use(renProcessMultiple)
