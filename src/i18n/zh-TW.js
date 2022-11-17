@@ -3,8 +3,8 @@ const t = {}
 t.loading = '加載中...'
 
 t.brand = {}
-t.brand.lg = '統壹框架'
-t.brand.mini = '框架'
+t.brand.lg = 'united-front'
+t.brand.mini = 'front'
 
 t.add = '新增'
 t.delete = '刪除'

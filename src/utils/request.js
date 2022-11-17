@@ -21,7 +21,6 @@ http.interceptors.request.use(config => {
   config.headers['Accept-Language'] = Cookies.get('language') || 'zh-CN'
   const { token } = store.state;
   if (!config.headers['Authorization']) {
-   // debugger
     if (token && token !== "undefined") {//token 过期 需要用到Basic，返回之后需要用到新的token
       config.headers['Authorization'] = 'Bearer ' + token;
     } else {
@@ -30,7 +29,7 @@ http.interceptors.request.use(config => {
   } else {
     console.log("已经设置:" + config.headers['Authorization'])
   }
-//debugger
+debugger
   // 默认参数
   var defaults = {}
   // 防止缓存，GET请求默认带_t参数
@@ -73,20 +72,22 @@ const dataForm = { refresh_token: '', grant_type: 'refresh_token', scope: 'openi
  * 响应拦截
  */
 http.interceptors.response.use(response => {
-  //debugger
   if (response.data.code === 450) {
+    debugger
     if (!isRefreshing) {
+      debugger
       isRefreshing = true
       const { refresh } = store.state;
       dataForm.refresh_token = refresh
+      console.log("reflash"+refresh);
       return http
         .post('/oauth/token', dataForm, {
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "content-type": "application/x-www-form-urlencoded",
             "Authorization": 'Basic ' + Base64.encode(`${window.SITE_CONFIG['clientId']}:${window.SITE_CONFIG['clientSecret']}`)
           }
         }).then(({ data: res }) => {
-         // debugger
+         debugger
           if (res.code !== 0) {
             clearLoginInfo()
             router.replace({ name: 'login' })

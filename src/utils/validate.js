@@ -48,6 +48,7 @@ export function getNowFormatDate() {
 }
 
 export function loadSignatureParams(config, data) {
+  debugger
   var timestamp = getNowFormatDate();
   var nonce = getUUID();
   var version = "1.0.0";
