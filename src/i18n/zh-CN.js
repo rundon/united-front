@@ -72,12 +72,12 @@ t.login.username = '用户名'
 t.login.password = '密码'
 t.login.captcha = '验证码'
 t.login.demo = '在线演示'
-t.login.copyright = '人人开源'
+t.login.copyright = 'copyright'
 
 t.home = {}
 t.home.sysInfo = {}
 t.home.sysInfo.name = '系统名称'
-t.home.sysInfo.nameVal = 'renren-security【企业版】'
+t.home.sysInfo.nameVal = 'united-framework'
 t.home.sysInfo.version = '版本信息'
 t.home.sysInfo.versionVal = window.SITE_CONFIG['version']
 t.home.sysInfo.osName = '操作系统'

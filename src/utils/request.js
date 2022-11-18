@@ -63,10 +63,23 @@ debugger
   return Promise.reject(error)
 })
 
-// 是否正在刷新的标记
+// 是否正在刷新的标记 -- 防止重复发出刷新token接口--节流阀
 let isRefreshing = false
-//重试队列
-let requests = []
+// 失效后同时发送请求的容器 -- 缓存接口
+let subscribers = []
+// 刷新 token 后, 将缓存的接口重新请求一次
+function onAccessTokenFetched (newToken) {
+  subscribers.forEach((callback) => {
+    callback(newToken)
+  })
+  // 清空缓存接口
+  subscribers = []
+}
+// 添加缓存接口
+function addSubscriber (callback) {
+  subscribers.push(callback)
+}
+
 const dataForm = { refresh_token: '', grant_type: 'refresh_token', scope: 'openid' }
 /**
  * 响应拦截
@@ -80,8 +93,7 @@ http.interceptors.response.use(response => {
       const { refresh } = store.state;
       dataForm.refresh_token = refresh
       console.log("reflash"+refresh);
-      return http
-        .post('/oauth/token', dataForm, {
+      http.post('/oauth/token', dataForm, {
           headers: {
             "content-type": "application/x-www-form-urlencoded",
             "Authorization": 'Basic ' + Base64.encode(`${window.SITE_CONFIG['clientId']}:${window.SITE_CONFIG['clientSecret']}`)
@@ -95,11 +107,7 @@ http.interceptors.response.use(response => {
           } else {
             const { access_token } = res.data;
             store.commit("UPDATE_TOKEN", access_token);
-            // response.headers.Authorization = 'Bearer ' + `${access_token}`
-            // access_token 刷新后将数组的方法重新执行
-            requests.forEach((cb) => cb(access_token))
-            requests = [] // 重新请求完清空
-            return http(response.config)
+            onAccessTokenFetched(access_token)
           }
         }).catch(() => {
           clearLoginInfo()
@@ -108,15 +116,20 @@ http.interceptors.response.use(response => {
         }).finally(() => {
           isRefreshing = false
         })
-    } else {
-      return new Promise(resolve => {
-        // 用函数形式将 resolve 存入，等待刷新后再执行
-        requests.push(token => {
-          response.headers.Authorization = 'Bearer ' + `${token}`
-          resolve(http(response.config))
-        })
-      })
     }
+    // 将其他接口缓存起来 
+    const retryRequest = new Promise((resolve) => {
+      // 返回Promise并且让其状态一直为等待状态,
+      // 只有当token刷新成功后, 就会调用通过addSubscriber函数添加的缓存接口,
+      // 此时, Promise的状态就会变成resolve
+      addSubscriber((newToken) => {
+        // 表示用新的token去替换掉原来的token
+        response.config.headers.Authorization = 'Bearer ' + newToken
+        // 用重新封装的config去请求, 就会将重新请求后的返回
+        resolve(http(response.config))
+      })
+    })
+    return retryRequest;
   } else if (response.data.code === 401) {
     clearLoginInfo()
     router.replace({ name: 'login' })
